@@ -7,21 +7,21 @@ import re
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
-from llm_client import LLMClient
+from .llm_client import LLMClient
 
 load_dotenv()
 
 url = os.getenv("TURSO_DATABASE_URL")
 auth_token = os.getenv("TURSO_AUTH_TOKEN")
 
-conn = libsql.connect("data/purple-check.db", sync_url=url, auth_token=auth_token) # type: ignore[unresolved-attribute]
+conn = libsql.connect("../data/db/purple-check.db", sync_url=url, auth_token=auth_token)  # type: ignore[unresolved-attribute]
 conn.sync()
 
 # Initialize LLM client
 llm = LLMClient()
 
 # Progress tracking
-PROGRESS_FILE = "data/progress.json"
+PROGRESS_FILE = "../data/processed/progress.json"
 
 
 def load_progress():
@@ -44,11 +44,11 @@ def fetch_comments(permalink: str) -> list[dict]:
 
     try:
         result = subprocess.run(
-            ["./tools/curlfire", url],
+            ["../tools/curlfire", url],
             capture_output=True,
             text=True,
             check=True,
-            timeout=30
+            timeout=30,
         )
 
         data = json.loads(result.stdout)
@@ -70,11 +70,13 @@ def fetch_comments(permalink: str) -> list[dict]:
 
                     # Skip deleted/removed comments
                     if body not in ["[deleted]", "[removed]"] and author != "[deleted]":
-                        comments.append({
-                            "author": author,
-                            "body": body,
-                            "score": comment_data.get("score", 0)
-                        })
+                        comments.append(
+                            {
+                                "author": author,
+                                "body": body,
+                                "score": comment_data.get("score", 0),
+                            }
+                        )
 
                     # Process replies
                     replies = comment_data.get("replies")
@@ -105,16 +107,18 @@ def download_image(url: str, temp_dir: str) -> str | None:
     try:
         # Generate filename from URL
         filename = url.split("/")[-1].split("?")[0]
-        if not any(filename.endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".gif", ".webp"]):
+        if not any(
+            filename.endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".gif", ".webp"]
+        ):
             filename += ".jpg"
 
         output_path = Path(temp_dir) / filename
 
         result = subprocess.run(
-            ["./tools/curlfire", "-o", str(output_path), url],
+            ["../tools/curlfire", "-o", str(output_path), url],
             capture_output=True,
             timeout=30,
-            check=True
+            check=True,
         )
 
         if output_path.exists() and output_path.stat().st_size > 0:
@@ -158,7 +162,9 @@ def extract_images_from_post(post: dict, temp_dir: str) -> list[str]:
     return image_paths
 
 
-def extract_instagram_username(post: dict, image_paths: list[str]) -> tuple[bool, str | None]:
+def extract_instagram_username(
+    post: dict, image_paths: list[str]
+) -> tuple[bool, str | None]:
     """Use LLM to determine if post is relevant and extract Instagram username"""
     title = post.get("title", "")
     selftext = post.get("selftext", "")
@@ -186,7 +192,7 @@ Remove @ symbol from username if present. Return lowercase username."""
             response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
 
         # Extract JSON from response
-        json_match = re.search(r'\{.*\}', response, re.DOTALL)
+        json_match = re.search(r"\{.*\}", response, re.DOTALL)
         if json_match:
             result = json.loads(json_match.group())
             is_relevant = result.get("is_relevant", False)
@@ -205,15 +211,19 @@ Remove @ symbol from username if present. Return lowercase username."""
         return False, None
 
 
-def analyze_sentiment(post: dict, comments: list[dict], image_paths: list[str]) -> tuple[str, str]:
+def analyze_sentiment(
+    post: dict, comments: list[dict], image_paths: list[str]
+) -> tuple[str, str]:
     """Use LLM to analyze sentiment of the feedback"""
     title = post.get("title", "")
     selftext = post.get("selftext", "")
 
-    comments_text = "\n".join([
-        f"- {c['author']} (score {c['score']}): {c['body'][:200]}"
-        for c in comments[:10]  # Limit to top 10 comments
-    ])
+    comments_text = "\n".join(
+        [
+            f"- {c['author']} (score {c['score']}): {c['body'][:200]}"
+            for c in comments[:10]  # Limit to top 10 comments
+        ]
+    )
 
     prompt = f"""Analyze the sentiment of this feedback about an Instagram seller.
 
@@ -241,7 +251,7 @@ Consider:
         else:
             response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
 
-        json_match = re.search(r'\{.*\}', response, re.DOTALL)
+        json_match = re.search(r"\{.*\}", response, re.DOTALL)
         if json_match:
             result = json.loads(json_match.group())
             sentiment = result.get("sentiment", "neutral")
@@ -255,7 +265,13 @@ Consider:
         return "neutral", "low"
 
 
-def insert_feedback(post: dict, username: str | None, sentiment: str, confidence: str, comments: list[dict]):
+def insert_feedback(
+    post: dict,
+    username: str | None,
+    sentiment: str,
+    confidence: str,
+    comments: list[dict],
+):
     """Insert feedback into database"""
     giver = post.get("author", "unknown")
     receiver = username if username else "unknown_instagram_user"
@@ -280,24 +296,23 @@ def insert_feedback(post: dict, username: str | None, sentiment: str, confidence
     comment_text = "\n".join(comment_parts)
 
     # Map sentiment to rating
-    rating_map = {
-        "positive": "POSITIVE",
-        "negative": "NEGATIVE",
-        "neutral": "NEUTRAL"
-    }
+    rating_map = {"positive": "POSITIVE", "negative": "NEGATIVE", "neutral": "NEUTRAL"}
     rating = rating_map.get(sentiment, "NEUTRAL")
 
     try:
         # Try to insert, if duplicate exists, update
         cursor = conn.cursor()
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO feedback (giver, receiver, rating, comment, platform, medium, source, giver_role, receiver_role)
             VALUES (?, ?, ?, ?, 'INSTAGRAM', 'DIRECT', 'REDDIT', 'buyer', 'seller')
             ON CONFLICT(giver, receiver) DO UPDATE SET
                 rating = excluded.rating,
                 comment = excluded.comment,
                 updated_at = CURRENT_TIMESTAMP
-        """, (giver, receiver, rating, comment_text))
+        """,
+            (giver, receiver, rating, comment_text),
+        )
 
         conn.commit()
         print(f"✓ Inserted feedback: {giver} -> {receiver} ({rating})")
@@ -310,7 +325,7 @@ def insert_feedback(post: dict, username: str | None, sentiment: str, confidence
 def process_posts(limit: int | None = None):
     """Main processing loop"""
     # Load posts
-    with open("data/merged_posts.json") as f:
+    with open("../data/processed/merged_posts.json") as f:
         all_posts = json.load(f)
 
     # Load progress
@@ -391,6 +406,7 @@ def process_posts(limit: int | None = None):
         finally:
             # Cleanup temp images
             import shutil
+
             if Path(temp_dir).exists():
                 shutil.rmtree(temp_dir)
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 class LLMClient:
     def __init__(self, provider: str | None = None):
-        config_path = Path(__file__).parent / "llm_config.json"
+        config_path = Path(__file__).parent.parent / "config" / "llm_config.json"
         with open(config_path) as f:
             self.config = json.load(f)
 
@@ -31,10 +31,12 @@ class LLMClient:
         with open(image_path, "rb") as f:
             return base64.b64encode(f.read()).decode("utf-8")
 
-    def _build_request(self, messages: list[dict[str, Any]], temperature: float = 0.7) -> dict:
+    def _build_request(
+        self, messages: list[dict[str, Any]], temperature: float = 0.7
+    ) -> dict:
         """Build request payload"""
         system_message = None
-        messages = []
+        processed_messages = []
 
         for msg in messages:
             if msg["role"] == "system":
@@ -43,33 +45,39 @@ class LLMClient:
                 content = msg["content"]
                 if isinstance(content, list):
                     # Handle multimodal content
-                    content = []
+                    processed_content = []
                     for item in content:
                         if item["type"] == "text":
-                            content.append({"type": "text", "text": item["text"]})
+                            processed_content.append(
+                                {"type": "text", "text": item["text"]}
+                            )
                         elif item["type"] == "image_url":
                             # Extract base64 from data URL
                             image_data = item["image_url"]["url"]
                             if image_data.startswith("data:"):
                                 media_type, data = image_data.split(";base64,")
                                 media_type = media_type.split(":")[1]
-                                content.append({
-                                    "type": "image",
-                                    "source": {
-                                        "type": "base64",
-                                        "media_type": media_type,
-                                        "data": data
+                                processed_content.append(
+                                    {
+                                        "type": "image",
+                                        "source": {
+                                            "type": "base64",
+                                            "media_type": media_type,
+                                            "data": data,
+                                        },
                                     }
-                                })
-                    messages.append({"role": msg["role"], "content": content})
+                                )
+                    processed_messages.append(
+                        {"role": msg["role"], "content": processed_content}
+                    )
                 else:
-                    messages.append({"role": msg["role"], "content": content})
+                    processed_messages.append({"role": msg["role"], "content": content})
 
         payload = {
             "model": self.model,
-            "messages": messages,
+            "messages": processed_messages,
             "max_tokens": 4096,
-            "temperature": temperature
+            "temperature": temperature,
         }
 
         if system_message:
@@ -77,20 +85,22 @@ class LLMClient:
 
         return payload
 
-    def _make_request(self, messages: list[dict[str, Any]], temperature: float = 0.7) -> str:
+    def _make_request(
+        self, messages: list[dict[str, Any]], temperature: float = 0.7
+    ) -> str:
         """Make HTTP request to LLM API"""
         # Build request based on provider
         payload = self._build_request(messages, temperature)
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.api_key}"
+            "Authorization": f"Bearer {self.api_key}",
         }
 
         req = request.Request(
             self.api_url,
             data=json.dumps(payload).encode("utf-8"),
             headers=headers,
-            method="POST"
+            method="POST",
         )
 
         with request.urlopen(req, timeout=60) as response:
@@ -115,21 +125,29 @@ class LLMClient:
                     raise
 
                 if attempt < self.max_retries - 1:
-                    wait_time = self.retry_delay * (2 ** attempt)  # Exponential backoff
-                    print(f"Retrying in {wait_time}s... (attempt {attempt + 1}/{self.max_retries})")
+                    wait_time = self.retry_delay * (2**attempt)  # Exponential backoff
+                    print(
+                        f"Retrying in {wait_time}s... (attempt {attempt + 1}/{self.max_retries})"
+                    )
                     time.sleep(wait_time)
             except Exception as e:
                 last_error = e
                 print(f"Error: {type(e).__name__}: {e}")
 
                 if attempt < self.max_retries - 1:
-                    wait_time = self.retry_delay * (2 ** attempt)
-                    print(f"Retrying in {wait_time}s... (attempt {attempt + 1}/{self.max_retries})")
+                    wait_time = self.retry_delay * (2**attempt)
+                    print(
+                        f"Retrying in {wait_time}s... (attempt {attempt + 1}/{self.max_retries})"
+                    )
                     time.sleep(wait_time)
 
-        raise Exception(f"Failed after {self.max_retries} attempts. Last error: {last_error}")
+        raise Exception(
+            f"Failed after {self.max_retries} attempts. Last error: {last_error}"
+        )
 
-    def call_with_images(self, prompt: str, image_paths: list[str], temperature: float = 0.7) -> str:
+    def call_with_images(
+        self, prompt: str, image_paths: list[str], temperature: float = 0.7
+    ) -> str:
         """Call LLM with text and images"""
         if len(image_paths) > 0 and not self.provider_config["supports_vision"]:
             raise ValueError(f"Provider {self.provider} does not support vision")
@@ -144,16 +162,20 @@ class LLMClient:
                 ".jpeg": "image/jpeg",
                 ".png": "image/png",
                 ".gif": "image/gif",
-                ".webp": "image/webp"
+                ".webp": "image/webp",
             }.get(ext, "image/jpeg")
 
             image_b64 = self._encode_image(img_path)
-            content.append({
-                "type": "image_url",
-                "image_url": {
-                    "url": f"data:{media_type};base64,{image_b64}"
+            content.append(
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:{media_type};base64,{image_b64}"},
                 }
-            })
+            )
 
         messages = [{"role": "user", "content": content}]
+        return self._call(messages, temperature)
+
+    def call(self, messages: list[dict[str, Any]], temperature: float = 0.7) -> str:
+        """Call LLM with text messages only"""
         return self._call(messages, temperature)

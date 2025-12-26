@@ -12,9 +12,9 @@ from datetime import datetime, timezone
 import sys
 
 # Configuration
-DATA_DIR = Path("data")
-FETCH_STATE_FILE = DATA_DIR / "fetch_state.json"
-CURLFIRE_PATH = Path("./tools/curlfire")
+DATA_DIR = Path("../data")
+FETCH_STATE_FILE = DATA_DIR / "processed" / "fetch_state.json"
+CURLFIRE_PATH = Path("../tools/curlfire")
 
 # Reddit API configuration
 REDDIT_BASE_URL = "https://www.reddit.com"
@@ -140,7 +140,7 @@ def update_subreddit_posts_file(subreddit, new_posts):
     Update the subreddit's posts.json file with new posts.
     Loads existing posts, adds new ones, sorts by timestamp, and saves.
     """
-    subreddit_dir = DATA_DIR / subreddit
+    subreddit_dir = DATA_DIR / "raw" / subreddit
     subreddit_dir.mkdir(exist_ok=True)
 
     posts_file = subreddit_dir / "posts.json"

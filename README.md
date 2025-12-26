@@ -17,32 +17,50 @@ The system now supports incremental fetching of new posts:
 ### Usage:
 ```bash
 # Fetch new posts incrementally (updates posts.json directly)
-python fetch_posts.py
+python scripts/fetch_posts.py
 
 # Create merged_posts.json from subreddit posts.json files
-python tools/extract_posts.py
+python scripts/extract_posts.py
 
 # Process new posts
-python main.py
+python scripts/main.py
 ```
 
 ### Scheduling (cron example):
 ```bash
 # Run daily at 2 AM
-0 2 * * * cd /path/to/agent && python fetch_posts.py && python tools/extract_posts.py && python main.py
+0 2 * * * cd /path/to/agent && python scripts/fetch_posts.py && python scripts/extract_posts.py && python scripts/main.py
 ```
 
 ### File Structure:
 ```
-data/
-├── fetch_state.json          # Tracks last fetched post per subreddit
-├── InstagramShops/
-│   ├── posts.json           # All posts for this subreddit (updated incrementally)
-│   └── end.json             # Original end marker from initial fetch
-├── InstaShoppingFails/
-│   ├── posts.json           # All posts for this subreddit (updated incrementally)
-│   └── end.json             # Original end marker from initial fetch
-└── merged_posts.json        # Combined posts from all subreddits
+agent/
+├── src/                    # Python source code modules
+│   ├── fetch.py           # Reddit data fetching logic
+│   ├── process.py         # Post processing and LLM analysis
+│   ├── extract.py         # Data extraction utilities
+│   ├── llm_client.py      # LLM API integration
+│   └── utils.py           # Shared utilities
+├── scripts/               # Entry point scripts
+│   ├── fetch_posts.py     # Calls src.fetch.main()
+│   ├── main.py           # Calls src.process.main()
+│   └── extract_posts.py   # Calls src.extract.main()
+├── data/                  # Data storage
+│   ├── raw/              # Raw subreddit JSON data
+│   │   ├── InstagramShops/
+│   │   └── InstaShoppingFails/
+│   ├── processed/        # Processed data files
+│   │   ├── fetch_state.json
+│   │   └── merged_posts.json
+│   └── db/              # Database files
+├── config/               # Configuration files
+│   └── llm_config.json   # LLM provider configuration
+├── tools/                # External binaries
+│   ├── curlfire          # HTTP client with Firefox cookies
+│   └── cookiefire        # Cookie extractor
+├── pyproject.toml        # Python dependencies
+├── README.md
+└── .env                  # Environment variables
 ```
 
 ### Key Changes:
