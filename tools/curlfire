@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+profile="default-release"
+skip=
+args=()
+for var in "$@"; do
+    # Ignore known bad arguments
+    case "$var" in
+        -P)
+            skip=yes
+            ;;
+        *)
+          if [ -z "$skip" ]; then
+              args+=("$var")
+          else
+              profile=$var
+          fi;
+          skip=
+    esac;
+done
+
+
+curlcookies="$(mktemp /tmp/curlcookies.XXXXXXXXXX)"
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+"$DIR/cookiefire" "$profile" > "$curlcookies"
+curl -b "$curlcookies" "${args[@]}" \
+  --compressed \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:143.0) Gecko/20100101 Firefox/143.0' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+  -H 'Accept-Language: en-US,en;q=0.5' \
+  -H 'Accept-Encoding: gzip, deflate, br, zstd' \
+  -H 'DNT: 1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: none' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Connection: keep-alive';
