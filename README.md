@@ -17,19 +17,19 @@ The system now supports incremental fetching of new posts:
 ### Usage:
 ```bash
 # Fetch new posts incrementally (updates posts.json directly)
-python scripts/fetch_posts.py
+python fetch_posts.py
 
 # Create merged_posts.json from subreddit posts.json files
-python scripts/extract_posts.py
+python extract_posts.py
 
 # Process new posts
-python scripts/main.py
+python main.py
 ```
 
 ### Scheduling (cron example):
 ```bash
 # Run daily at 2 AM
-0 2 * * * cd /path/to/agent && python scripts/fetch_posts.py && python scripts/extract_posts.py && python scripts/main.py
+0 2 * * * cd /path/to/agent && python fetch_posts.py && python extract_posts.py && python main.py
 ```
 
 ### File Structure:
@@ -41,10 +41,6 @@ agent/
 │   ├── extract.py         # Data extraction utilities
 │   ├── llm_client.py      # LLM API integration
 │   └── utils.py           # Shared utilities
-├── scripts/               # Entry point scripts
-│   ├── fetch_posts.py     # Calls src.fetch.main()
-│   ├── main.py           # Calls src.process.main()
-│   └── extract_posts.py   # Calls src.extract.main()
 ├── data/                  # Data storage
 │   ├── raw/              # Raw subreddit JSON data
 │   │   ├── InstagramShops/
@@ -60,6 +56,9 @@ agent/
 │   └── cookiefire        # Cookie extractor
 ├── pyproject.toml        # Python dependencies
 ├── README.md
+├── fetch_posts.py        # Entry point: calls src.fetch.main()
+├── main.py              # Entry point: calls src.process.main()
+├── extract_posts.py     # Entry point: calls src.extract.main()
 └── .env                  # Environment variables
 ```
 
