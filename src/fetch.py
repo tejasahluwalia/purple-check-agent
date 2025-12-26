@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Fetch new posts from Reddit subreddits incrementally.
 Uses curlfire for authenticated requests and tracks last fetched post per subreddit.
@@ -7,9 +6,8 @@ Uses curlfire for authenticated requests and tracks last fetched post per subred
 import json
 import subprocess
 import time
-from pathlib import Path
 from datetime import datetime, timezone
-import sys
+from pathlib import Path
 
 # Configuration
 DATA_DIR = Path("../data")
@@ -56,7 +54,7 @@ def make_reddit_request(url, retry_count=0):
             return make_reddit_request(url, retry_count + 1)
         raise
     except subprocess.TimeoutExpired:
-        print(f"  Timeout after 30 seconds")
+        print("  Timeout after 30 seconds")
         if retry_count < MAX_RETRIES:
             print(f"  Retrying in {RETRY_DELAY} seconds...")
             time.sleep(RETRY_DELAY)
@@ -94,14 +92,14 @@ def fetch_subreddit_posts(subreddit, last_post_id):
             response = make_reddit_request(url)
 
             if "data" not in response or "children" not in response["data"]:
-                print(f"    No posts in response")
+                print("    No posts in response")
                 break
 
             posts = response["data"]["children"]
             print(f"    Received {len(posts)} posts")
 
             if not posts:
-                print(f"    No more posts")
+                print("    No more posts")
                 break
 
             # Process posts
@@ -122,7 +120,7 @@ def fetch_subreddit_posts(subreddit, last_post_id):
             # Check for more pages
             after_token = response["data"].get("after")
             if not after_token:
-                print(f"    No more pages (after=null)")
+                print("    No more pages (after=null)")
                 break
 
             # Small delay to be polite to Reddit API
@@ -206,7 +204,7 @@ def main():
         )
 
         if not new_posts:
-            print(f"  No new posts found")
+            print("  No new posts found")
             continue
 
         print(f"  Found {len(new_posts)} new posts")
@@ -231,19 +229,17 @@ def main():
 
         # Save state after each subreddit for safety
         save_fetch_state(state)
-        print(f"  Updated fetch state")
+        print("  Updated fetch state")
 
     print(f"\n{'=' * 60}")
     print(f"Summary: Fetched {total_new_posts} new posts total")
 
     if total_new_posts > 0:
-        print(f"\nNext steps:")
-        print(
-            f"1. Run: python tools/extract_posts.py (to regenerate merged_posts.json)"
-        )
-        print(f"2. Run: python main.py (to process new posts)")
+        print("\nNext steps:")
+        print("1. Run: python tools/extract_posts.py (to regenerate merged_posts.json)")
+        print("2. Run: python main.py (to process new posts)")
     else:
-        print(f"No new posts to process")
+        print("No new posts to process")
 
 
 if __name__ == "__main__":
