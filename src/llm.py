@@ -1,10 +1,11 @@
+import base64
 import json
 import os
+import re
 import time
-import base64
-from typing import Any
-from urllib import request, error
 from pathlib import Path
+from typing import Any
+from urllib import error, request
 
 
 class LLMClient:
@@ -179,3 +180,109 @@ class LLMClient:
     def call(self, messages: list[dict[str, Any]], temperature: float = 0.7) -> str:
         """Call LLM with text messages only"""
         return self._call(messages, temperature)
+
+
+def extract_instagram_username(
+    post: dict, image_paths: list[str]
+) -> tuple[bool, str | None]:
+    """Use LLM to determine if post is relevant and extract Instagram username"""
+    title = post.get("title", "")
+    selftext = post.get("selftext", "")
+
+    prompt = f"""Analyze this Reddit post to determine if it refers to an Instagram page/account.
+
+Title: {title}
+
+Text: {selftext}
+
+Instructions:
+1. Determine if this post is about an Instagram page, shop, or seller
+2. If yes, extract the Instagram username (handle)
+3. Look for patterns like: @username, instagram.com/username, "bought from username", account names mentioned
+4. Return ONLY a JSON object with this exact format:
+{{"is_relevant": true/false, "username": "extracted_username_or_null"}}
+
+If no clear Instagram username can be extracted, set username to null but is_relevant can still be true if it clearly refers to Instagram.
+Remove @ symbol from username if present. Return lowercase username."""
+    llm = LLMClient()
+
+    try:
+        if image_paths:
+            response = llm.call_with_images(prompt, image_paths, temperature=0.3)
+        else:
+            response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
+
+        # Extract JSON from response
+        json_match = re.search(r"\{.*\}", response, re.DOTALL)
+        if json_match:
+            result = json.loads(json_match.group())
+            is_relevant = result.get("is_relevant", False)
+            username = result.get("username")
+
+            # Normalize username
+            if username:
+                username = username.strip().lower().replace("@", "")
+
+            return is_relevant, username
+
+        return False, None
+
+    except Exception as e:
+        print(f"Error in Instagram username extraction: {e}")
+        return False, None
+
+
+def analyze_sentiment(
+    post: dict, comments: list[dict], image_paths: list[str]
+) -> tuple[str, str]:
+    """Use LLM to analyze sentiment of the feedback"""
+    llm = LLMClient()
+
+    title = post.get("title", "")
+    selftext = post.get("selftext", "")
+
+    comments_text = "\n".join(
+        [
+            f"- {c['author']} (score {c['score']}): {c['body'][:200]}"
+            for c in comments[:10]  # Limit to top 10 comments
+        ]
+    )
+
+    prompt = f"""Analyze the sentiment of this feedback about an Instagram seller.
+
+Title: {title}
+
+Post: {selftext}
+
+Comments:
+{comments_text if comments_text else "No comments"}
+
+Instructions:
+Determine if this is positive, negative, or neutral feedback about the Instagram seller.
+Return ONLY a JSON object with this exact format:
+{{"sentiment": "positive/negative/neutral", "confidence": "high/medium/low"}}
+
+Consider:
+- Words like scam, fraud, fake, disappointed = negative
+- Words like genuine, great, recommend, satisfied = positive
+- Complaints about product quality, delivery, refunds = negative
+- Praise about service, product, communication = positive"""
+
+    try:
+        if image_paths:
+            response = llm.call_with_images(prompt, image_paths[:3], temperature=0.3)
+        else:
+            response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
+
+        json_match = re.search(r"\{.*\}", response, re.DOTALL)
+        if json_match:
+            result = json.loads(json_match.group())
+            sentiment = result.get("sentiment", "neutral")
+            confidence = result.get("confidence", "low")
+            return sentiment, confidence
+
+        return "neutral", "low"
+
+    except Exception as e:
+        print(f"Error in sentiment analysis: {e}")
+        return "neutral", "low"
