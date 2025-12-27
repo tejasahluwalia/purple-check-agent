@@ -1,14 +1,14 @@
 {
   "InstagramShops": {
-    "last_post_id": "t3_1pex4ok",
-    "last_post_timestamp": 1764946516.0,
-    "last_fetch_time": "2025-12-26T13:49:29.484889+00:00",
-    "total_posts_fetched": 1199
+    "last_post_id": "t3_1pwvsrg",
+    "last_post_timestamp": 1766835318.0,
+    "last_fetch_time": "2025-12-27T13:10:30.953989+00:00",
+    "total_posts_fetched": 1281
   },
   "InstaShoppingFails": {
-    "last_post_id": "t3_1pvj9p4",
-    "last_post_timestamp": 1766686699.0,
-    "last_fetch_time": "2025-12-26T13:49:31.102535+00:00",
-    "total_posts_fetched": 740
+    "last_post_id": "t3_1pwqxw7",
+    "last_post_timestamp": 1766817081.0,
+    "last_fetch_time": "2025-12-27T13:10:31.593295+00:00",
+    "total_posts_fetched": 742
   }
 }

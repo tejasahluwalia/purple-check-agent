@@ -2,11 +2,10 @@ import json
 import tempfile
 from pathlib import Path
 
-from .db import conn, insert_feedback
+from .feedback_db import conn, insert_feedback
+from .fetch import fetch_post_comments
 from .llm import analyze_sentiment, extract_instagram_username
 from .utils import (
-    extract_images_from_post,
-    fetch_comments,
     load_progress,
     save_progress,
 )
@@ -39,11 +38,6 @@ def process_posts(limit: int | None = None):
         temp_dir = tempfile.mkdtemp(prefix="reddit_images_")
 
         try:
-            # Download images
-            print("  Downloading images...")
-            image_paths = extract_images_from_post(post, temp_dir)
-            print(f"  Downloaded {len(image_paths)} images")
-
             # Check relevance and extract username
             print("  Checking relevance...")
             is_relevant, username = extract_instagram_username(post, image_paths)
@@ -58,7 +52,7 @@ def process_posts(limit: int | None = None):
             # Fetch comments
             print("  Fetching comments...")
             try:
-                comments = fetch_comments(post.get("permalink", ""))
+                comments = fetch_post_comments(post.get("permalink", ""))
                 print(f"  Found {len(comments)} comments")
             except Exception as e:
                 print(f"  ✗ Failed to fetch comments: {e}")

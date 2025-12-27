@@ -5,15 +5,14 @@ This agent uses information from reddit to populate the Purple Check database wi
 - Production Purple Check (Turso Cloud libsql/sqlite3) database is connected. The schema is available in schema.sql.
 - Posts from Reddit subreddits are saved in `data/<subreddit-name>` in the format provided by the public JSON API. 
     - These posts are validated and concatenated into a single `data/merged_posts.json` by the `tools/extract_posts.py` script.
-- Any requests to public websites like reddit should be made through `tools/curlfire` which uses my firefox cookies and headers to avoid getting blocked.
+- Any requests to public websites like reddit should be made through `lib/curlfire` which uses my firefox cookies and headers to avoid getting blocked.
 
 # Workflow
 
 ## 1. Fetch posts (Incremental)
 The system supports incremental fetching of new posts:
 - **Checkpoint tracking**: `data/fetch_state.json` tracks the last fetched post per subreddit
-- **Incremental fetch**: Run `python fetch_posts.py` to fetch only new posts since last run
-- **Simplified storage**: Only `posts.json` files are maintained (no individual `t3_*.json` files)
+- **Incremental fetch**: Run `uv run fetch_posts.py` to fetch only new posts since last run
 - **API integration**: Uses Reddit's `/new.json` endpoint with `before` parameter
 - **Authentication**: Uses `curlfire` with Firefox cookies to avoid rate limiting
 
@@ -28,13 +27,13 @@ The system supports incremental fetching of new posts:
 ## Usage:
 ```bash
 # Fetch new posts incrementally (updates posts.json directly)
-python fetch_posts.py
+uv run fetch_posts.py
 
 # Create merged_posts.json from subreddit posts.json files
-python extract_posts.py
+uv run extract_posts.py
 
 # Process new posts
-python main.py
+uv run main.py
 ```
 
 ## File Structure:
@@ -57,7 +56,7 @@ agent/
 │   └── db/               # Database files
 ├── config/               # Configuration files
 │   └── llm_config.json   # LLM provider configuration
-├── tools/                # External binaries
+├── lib/                # External binaries
 │   ├── curlfire          # HTTP client with Firefox cookies
 │   └── cookiefire        # Cookie extractor
 ├── pyproject.toml        # Python dependencies
