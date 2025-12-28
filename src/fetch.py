@@ -5,7 +5,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .posts_db import (
-    count_posts,
     insert_post,
 )
 
@@ -260,11 +259,8 @@ def main():
             print(f"  ✗ Error fetching {subreddit}: {e}")
             continue
 
-    final_count = count_posts()
-
     print(f"\n{'=' * 60}")
     print("Summary:")
-    print(f"  - Total posts in database: {final_count}")
     print(f"  - New posts fetched: {total_new_posts}")
     print(f"{'=' * 60}")
 

@@ -182,9 +182,7 @@ class LLMClient:
         return self._call(messages, temperature)
 
 
-def extract_instagram_username(
-    post: dict, image_paths: list[str]
-) -> tuple[bool, str | None]:
+def extract_instagram_username(post: dict) -> tuple[bool, str | None]:
     """Use LLM to determine if post is relevant and extract Instagram username"""
     title = post.get("title", "")
     selftext = post.get("selftext", "")
@@ -207,10 +205,7 @@ Remove @ symbol from username if present. Return lowercase username."""
     llm = LLMClient()
 
     try:
-        if image_paths:
-            response = llm.call_with_images(prompt, image_paths, temperature=0.3)
-        else:
-            response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
+        response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
 
         # Extract JSON from response
         json_match = re.search(r"\{.*\}", response, re.DOTALL)
@@ -232,9 +227,7 @@ Remove @ symbol from username if present. Return lowercase username."""
         return False, None
 
 
-def analyze_sentiment(
-    post: dict, comments: list[dict], image_paths: list[str]
-) -> tuple[str, str]:
+def analyze_sentiment(post: dict, comments: list[dict]) -> tuple[str, str]:
     """Use LLM to analyze sentiment of the feedback"""
     llm = LLMClient()
 
@@ -269,10 +262,7 @@ Consider:
 - Praise about service, product, communication = positive"""
 
     try:
-        if image_paths:
-            response = llm.call_with_images(prompt, image_paths[:3], temperature=0.3)
-        else:
-            response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
+        response = llm.call([{"role": "user", "content": prompt}], temperature=0.3)
 
         json_match = re.search(r"\{.*\}", response, re.DOTALL)
         if json_match:
