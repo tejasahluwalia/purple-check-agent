@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Fetch new posts from Reddit subreddits incrementally.
 """

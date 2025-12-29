@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Process Reddit posts to extract Instagram feedback.
 """
