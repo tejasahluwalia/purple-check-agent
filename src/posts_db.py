@@ -170,3 +170,19 @@ def mark_post_processed(post_id: str) -> None:
 
     conn.commit()
     conn.close()
+
+
+def update_post_analysis(
+    post_id: str, instagram_username: str | None, sentiments: list[dict]
+) -> None:
+    """Update post with extracted Instagram username and sentiments"""
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE posts SET instagram_username = ?, sentiments = ? WHERE id = ?",
+        (instagram_username, json.dumps(sentiments), post_id),
+    )
+
+    conn.commit()
+    conn.close()

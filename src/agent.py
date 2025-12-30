@@ -5,6 +5,7 @@ from .posts_db import (
     delete_post,
     get_unprocessed_posts,
     mark_post_processed,
+    update_post_analysis,
     update_post_comments,
 )
 
@@ -25,7 +26,7 @@ def process_posts(limit: int | None = None):
         try:
             # Check relevance and extract username
             print("  Checking relevance...")
-            is_relevant, username = extract_instagram_username(post)
+            is_relevant, username = extract_instagram_username(post, post["images"])
 
             if not is_relevant:
                 print("  ✗ Not relevant, deleting from database...")
@@ -47,12 +48,19 @@ def process_posts(limit: int | None = None):
 
             # Analyze sentiment
             print("  Analyzing sentiment...")
-            sentiment, confidence = analyze_sentiment(post, comments)
-            print(f"  Sentiment: {sentiment} ({confidence} confidence)")
+            sentiments = analyze_sentiment(username, post, comments, post["images"])
 
-            # Insert to database
-            print("  Saving to database...")
-            insert_feedback(post, username, sentiment, confidence, comments)
+            for sentiment in sentiments:
+                print(
+                    f"  Sentiment: {sentiment['sentiment']} By: {sentiment['author']}"
+                )
+
+                # Insert to database
+                print("  Saving to database...")
+                insert_feedback(sentiment["author"], username, sentiment["sentiment"])
+
+            # Save username and sentiments to posts database
+            update_post_analysis(post_id, username, sentiments)
 
             # Mark as processed
             mark_post_processed(post_id)

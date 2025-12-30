@@ -13,35 +13,11 @@ conn.sync()
 
 
 def insert_feedback(
-    post: dict,
-    username: str | None,
+    giver: str,
+    receiver: str,
     sentiment: str,
-    confidence: str,
-    comments: list[dict],
 ):
     """Insert feedback into database"""
-    giver = post.get("author", "unknown")
-    receiver = username if username else "unknown_instagram_user"
-
-    # Create comment text
-    title = post.get("title", "")
-    selftext = post.get("selftext", "")
-    permalink = post.get("permalink", "")
-
-    comment_parts = [f"Title: {title}"]
-    if selftext:
-        comment_parts.append(f"Post: {selftext[:500]}")
-
-    if comments:
-        comment_parts.append(f"\nTop comments ({len(comments)}):")
-        for c in comments[:5]:
-            comment_parts.append(f"- {c['body'][:150]}")
-
-    comment_parts.append(f"\nReddit link: https://reddit.com{permalink}")
-    comment_parts.append(f"Confidence: {confidence}")
-
-    comment_text = "\n".join(comment_parts)
-
     # Map sentiment to rating
     rating_map = {"positive": "POSITIVE", "negative": "NEGATIVE", "neutral": "NEUTRAL"}
     rating = rating_map.get(sentiment, "NEUTRAL")
@@ -58,7 +34,7 @@ def insert_feedback(
                 comment = excluded.comment,
                 updated_at = CURRENT_TIMESTAMP
         """,
-            (giver, receiver, rating, comment_text),
+            (giver, receiver, rating, ""),
         )
 
         conn.commit()

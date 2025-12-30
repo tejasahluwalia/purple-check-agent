@@ -1,0 +1,364 @@
+[
+	{
+		"input": {
+			"post": {
+				"title": "Nilaya decor - ceramics - dont buy",
+				"selftext": "I ordered 4 cups to gift it to my trainers. But the quality of the designs is so bleh. Nothing like the pics. One of the cups had a botched design. I asked for return, the person mentioned its just a handmade design and nothing wrong with it. Attaching the pics and the persons response. So that people dont waste their precious time and money.  ",
+				"author": "Bobmom23"
+			},
+			"images": [
+				"https://preview.redd.it/0nn6v740l3sf1.jpg?width=1080&format=pjpg&auto=webp&s=01779e4b2481ff42b85200485f17ab84c0131181",
+				"https://preview.redd.it/jturg7t0l3sf1.jpg?width=2992&format=pjpg&auto=webp&s=248415bc7debe1c445b3c126f20a5ac0fc94ade3",
+				"https://preview.redd.it/ie62zvf0l3sf1.png?width=1080&format=png&auto=webp&s=81de16c22b66410d8e7e0c9069b707b3908c71f3"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "nilaya.decor"
+		},
+		"post_id": "1ntgotk",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1ntgotk/nilaya_decor_ceramics_dont_buy/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Is this store legit",
+				"selftext": "The prices are too good to be true.. has anyone ever bought something from them",
+				"author": "ExaminationBig4633"
+			},
+			"images": [
+				"https://preview.redd.it/ca9lbeggf1je1.jpeg?auto=webp&s=f93148da462c35465ec0f9af95a15a1f791804ef"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "tanejaclothhouse"
+		},
+		"post_id": "1ip36wd",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1ip36wd/is_this_store_legit/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "More Scammers on Insta?",
+				"selftext": "Hi redditors,\n\ni analyze data and i just saw that your subreddit grew over [37% today.](https://reddstats.com/ranking/relative?over18=False&amp;period=daily&amp;subscriber_classification=1001-10000)\n\nAny idea why this is happening?",
+				"author": "reddstats"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": false,
+			"username": "null"
+		},
+		"post_id": "193wgm6",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/193wgm6/more_scammers_on_insta/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Alamode by Akanksha",
+				"selftext": "Has anybody ordered from this store? Are the products genuine? What is the delivery timem How was the quality and return processes? Please help as I'm planning on getting something from them for an event in March. Thankyou!!!",
+				"author": "svini_02"
+			},
+			"images": [
+				"https://preview.redd.it/bug5k68przjc1.jpeg?auto=webp&s=a09661d255d3bd0cc859097edcb0f0a8c16b6332"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "a.la.modebyakanksha"
+		},
+		"post_id": "1awl7nf",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1awl7nf/alamode_by_akanksha/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Digicams for sale \ud83d\udcf8(only India)",
+				"selftext": "Just launched my Digicam Store on Instagram! @camzone.india (link in bio) I'd love for you to check out my collection of good condition digicams at super affordable prices! DM me if you're interested, happy to help!\ud83d\ude42",
+				"author": "Former_Two_1534"
+			},
+			"images": [
+				"https://preview.redd.it/49x2ix5rso6f1.jpeg?auto=webp&s=3fb1463929ef4dc774004702a53b503b21d1022f"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "camzone.india"
+		},
+		"post_id": "1laehbj",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1laehbj/digicams_for_sale_only_india/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Inkarto....Fraud no 1...BEWARE",
+				"selftext": "This is a fraud company thier products and after sale is terrible don't waste your hard earned money on them...it's a very long story but in short they are CHOR FRAUD AND DHOKEBAAZ NO 1..Is liye please BACHO INSE",
+				"author": "Creepy-Ant-435"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": false,
+			"username": "null"
+		},
+		"post_id": "1kntj5a",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1kntj5a/inkartofraud_no_1beware/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "IS FLEXCASE SCAM OR WHAT",
+				"selftext": "heys folks so basically i've just recently ordered 4 cases from flex case and then idk i got an instinct to check reddit for the peoples review but i was soo dumb to soo all that after ordering sooo on top i got 3 post regarding that they are SCAM and they are running multiple sites and scamming people idk whats true and whats not i just want your help if possible kindly share their contact number.  \nLink 1: [https://www.reddit.com/r/InstagramShops/comments/1gt8mcn/flexcases/](https://www.reddit.com/r/InstagramShops/comments/1gt8mcn/flexcases/)\n\nLink 2: [https://www.reddit.com/r/InstaCelebsGossip/comments/1i1xclb/scam\\_by\\_flex\\_cases/](https://www.reddit.com/r/InstaCelebsGossip/comments/1i1xclb/scam_by_flex_cases/)\n\nLink 3: [https://www.reddit.com/r/InstagramShops/comments/1i206sz/scam\\_by\\_flex\\_cases/](https://www.reddit.com/r/InstagramShops/comments/1i206sz/scam_by_flex_cases/)\n\nLink 4(imp): [https://www.reddit.com/r/InstagramShops/comments/1e7s43s/name\\_shame\\_thecasefactoryin\\_fraud\\_alert/](https://www.reddit.com/r/InstagramShops/comments/1e7s43s/name_shame_thecasefactoryin_fraud_alert/)",
+				"author": "kooldude6969"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "flex_cases"
+		},
+		"post_id": "1jyffwb",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1jyffwb/is_flexcase_scam_or_what/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "This page selling Chikankari scammed me. It's been almost 15 days since I placed order to them for worth rupees 1800.Anybody else did business with this page?. Please help me to get my money back\ud83d\ude4f\ud83d\ude14",
+				"selftext": "This page selling Chikankari scammed me. It's been almost 15 days since I placed order to them for worth rupees 1800. Initially, they were quick to respond all my questions. But after I paid the amount, I got response after 4-5 days with a tracking ID. I told them to send the picture of my parcel with address , they did. I checked the tracking ID on India Post which said that the ID is invalid. Now they are not responding to messages at all \ud83d\ude2b. I want my hard earned money back. These scammers have just ruined insta business for people. What can I do?",
+				"author": "Flora2708"
+			},
+			"images": [
+				"https://preview.redd.it/d7fjvcfapr0f1.jpg?width=720&format=pjpg&auto=webp&s=3f3c0f727cd17c517a4cd3e597eac6c45e29e600",
+				"https://preview.redd.it/2mxrfc89pr0f1.jpg?width=720&format=pjpg&auto=webp&s=0e884bdd718c9959e585048687d42eaeb674ea9b",
+				"https://preview.redd.it/4is5wfb9pr0f1.jpg?width=720&format=pjpg&auto=webp&s=844ab56420d7dce8c51ea7e62bfcb7fbf6a42e6d",
+				"https://preview.redd.it/1uls3c89pr0f1.jpg?width=720&format=pjpg&auto=webp&s=5089ccbc30766f6ecd09fc35a14c0859d9f2fb94",
+				"https://preview.redd.it/iif0fnfapr0f1.jpg?width=720&format=pjpg&auto=webp&s=82fabd248930a1f2621b08646d4ebd6e3baa77d9",
+				"https://preview.redd.it/ljdlwm89pr0f1.jpg?width=720&format=pjpg&auto=webp&s=2c23e19ae4bd48f9ead83773269a50b627050d1d",
+				"https://preview.redd.it/2v0jud89pr0f1.jpg?width=720&format=pjpg&auto=webp&s=80978eba8b4f05e540779f3f7cb4294fa9216aa7"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "chikankarihouse_"
+		},
+		"post_id": "1kmid27",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1kmid27/this_page_selling_chikankari_scammed_me_its_been/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Your experience with shein india?",
+				"selftext": "Thinking of ordering 3-4 tops from here, but I want to know how has your experience been with returns, delivery and quality of products ",
+				"author": "hellothisiskitty222"
+			},
+			"images": [
+				"https://preview.redd.it/cyhowada4bmf1.png?auto=webp&s=449544c2326ed7e4a63d45532b0cab9639f30df8"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "shein_ind"
+		},
+		"post_id": "1n4ogqq",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1n4ogqq/your_experience_with_shein_india/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Disappointed by Championskit.in",
+				"selftext": "I ordered a travis x barca away jersey but received a different item no help yet from the contract email and number provided in the site ",
+				"author": "Barry6999"
+			},
+			"images": [
+				"https://preview.redd.it/y2q76yn0vf6f1.jpg?width=2160&format=pjpg&auto=webp&s=cb6c58a2007dc075991d9da3aaf409f3ec632db2",
+				"https://preview.redd.it/u803new0vf6f1.png?width=1084&format=png&auto=webp&s=965f5d0e802d1797ed25b0df509a5927df45e00f"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "championskit.in"
+		},
+		"post_id": "1l9f8gk",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1l9f8gk/disappointed_by_championskitin/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Amrrutam Jewellery : A huge huge scam",
+				"selftext": "The person who owns Amrrutam was really mean and rushed, and they charged way too much for stuff that wasn't very good. Even if the stuff was okay, the owner was so rude that it ruined everything. \n\nI bought something from there and after wearing it just twice, small diamonds fell off. It was still under warranty, but when I asked the owner, Richa Gupta, about it, she was really mean. She said they wouldn't replace the diamonds because they only cover fixing the color and polish. But they never said that on their website. She talked over me and acted like she didn't care. It's better to stay away from that online store.\n\nThe owner's hurtful words caused me a lot of pain, and no product is worth that kind of trauma. She repeatedly accused and abused me of writing fake reviews, which made things even worse. It took me nearly a year to share my experience, but seeing others fall victim to similar scams on Instagram and reading them here pushed me to speak up on my sister\u2019s insistence. \n\nDealing with the owner herself was a nightmare, the harassment I faced from her made it seem better to just accept a big loss rather than interact with her. The products were terrible quality, and the service was the worst I've ever experienced. I can't stop thinking about how she spoke to me. I know this can come across as so harsh and rude but I really have never been spoken to like this. She was very sweet the first time while buying and then the way she talked later made me feel so shitty about myself. \n\nIt's hard to understand why it took me so long to share this, but if you can afford it, I suggest shopping in a physical store or ordering from a more reputable place. Don't get fooled by this. They don't provide authenticity cards to prove their products are actually 92.5% silver, and they charge way too much for such low-quality items.\n\nHelp me post this in the bigger community, \nr/Instacelebgossip as well\nI have very low karma and the post has not yet been approved by mods there.\n",
+				"author": "Alert-Protection632"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "amrrutamjewellery"
+		},
+		"post_id": "1axkeyo",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1axkeyo/amrrutam_jewellery_a_huge_huge_scam/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Help i ordered from case factory",
+				"selftext": "After seeing many ads on youtube i bought 3 cases from them during their buy 1 get 2 deal and placed order of 1200 on 7th September i have no luck getting response from mail and their phone no. Is switched off and this is the only response i got from them on instagram chat.\nI didn't felt the need to legit check them as i saw many ads constantly on youtube and they are also sponsor beangluru fc but i found out about bad reviews and terrible service after placing my order \nWhat should i do now",
+				"author": "ApprehensiveMonk5834"
+			},
+			"images": [
+				"https://preview.redd.it/biybnyt21bpf1.jpg?width=1080&format=pjpg&auto=webp&s=164b7c379a371d57f49d2f3b5d9312ad47441148",
+				"https://preview.redd.it/z6uqi3631bpf1.jpg?width=1080&format=pjpg&auto=webp&s=3cc9d33fac7f5d1963e4c4a7f5d7842845d687f7"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "thecasefactory.in"
+		},
+		"post_id": "1nhi0aw",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1nhi0aw/help_i_ordered_from_case_factory/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Terrible experience with Shop Mistry",
+				"selftext": "Ordered 4 products on their B1G1 sale back in October. They were running a stock clearance. Got only 2 products delivered, with the rest 6.2k INR worth orders pending since then.\n\nEmailed their customer support at least 10 times and messaged them on Instagram. But they keep saying the product will be shipped in 4 days, without ever actually providing any tracking details. \n\nDefinitely never ordering again and would appreciate if there's any way I can get my money back now. So frustrated ",
+				"author": "simsiex"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "shopmistry"
+		},
+		"post_id": "1pmace8",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1pmace8/terrible_experience_with_shop_mistry/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Fraud Website Pratap Sons Jaipur",
+				"selftext": "I bought an outfit from @pratapsonsjaipur  \nThey sent a product which didn\u2019t match the photo on the website. I had messaged and called them to ask them to send the correct product to me but they didn\u2019t reply to any of my messages or calls. After 3 days they send me a link for store credit saying all returns to be done within 3 days. That time had already lapsed. \nWhen I got no response after that as well, I wrote on their Instagram post citing my experience, they deleted it immediately. \n\nSo I am posting here as I had no other option. \n\nTagging influencers so everyone knows to stay away from this fraud website.",
+				"author": "Wide-Nothing7114"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "pratapsonsjaipur"
+		},
+		"post_id": "1aywj6g",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1aywj6g/fraud_website_pratap_sons_jaipur/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Rakhi Hamper for bhaiya-bhabhi\ud83d\udc95",
+				"selftext": "Thoughtfully curated with lots of love\ud83e\udef6\ud83c\udffc\nEvery little item has been hand-picked by us and features handmade items as well!\n\nThis hamper includes: 1 card, 1 rakhi, 1 bracelet lumba, bow hairclip, acrylic polaroid fridge magnet, dainty pendant, 3 polaroids, handmade evil eye clay phone charm and chocolate \u2764\ufe0f\n\n\nDM to order yours now\ud83d\udc95\n\nLimited pieces available! Comes in sturdy magnetic gift box packaging \n\nShipping PAN India. \n\nInstagram: @artilyforever.in",
+				"author": "Artilyforever"
+			},
+			"images": [
+				"https://preview.redd.it/7lo8fnb837cf1.jpg?width=4284&format=pjpg&auto=webp&s=341f33ab6c20f71dd769cea6941ee6f82d68efcd",
+				"https://preview.redd.it/2kxaejb837cf1.jpg?width=4284&format=pjpg&auto=webp&s=cb025bbdc797fe4bd00243872c72fbd0cd01e808"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "artilyforever.in"
+		},
+		"post_id": "1lx0eoj",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1lx0eoj/rakhi_hamper_for_bhaiyabhabhi/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Suggest stores selling Hypoallergenic earrings ",
+				"selftext": "Hey guys! Kindly suggest stores selling 14k to 18k gold-plated earrings. ",
+				"author": "boabitchh"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": false,
+			"username": "null"
+		},
+		"post_id": "1h19h7x",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1h19h7x/suggest_stores_selling_hypoallergenic_earrings/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Acrylic Paintings for sale",
+				"selftext": "Handmade acrylic paintings made on wooden canvas board for sale. Please ping me if they interest you \ud83d\ude04",
+				"author": "Aggravating-Court-13"
+			},
+			"images": [
+				"https://preview.redd.it/rwkm2ikzztxe1.jpg?width=2268&format=pjpg&auto=webp&s=808ab09415680e12ed5cfbb02aeb8c7c2dd89c6b",
+				"https://preview.redd.it/v0m5djkzztxe1.jpg?width=3024&format=pjpg&auto=webp&s=22b4db3b6265ce187614adc052ab11b1d372321e",
+				"https://preview.redd.it/zx8m8anzztxe1.jpg?width=2268&format=pjpg&auto=webp&s=529b9c32cf2c8a2207188fba598573c4a2c6396f",
+				"https://preview.redd.it/fgs3sikzztxe1.jpg?width=1242&format=pjpg&auto=webp&s=4359460d1670c5d465c18e4021590449388427d4",
+				"https://preview.redd.it/bxm3npnzztxe1.jpg?width=3024&format=pjpg&auto=webp&s=824ee74a0bcd8d6de71cdbf7208169c051a6a623",
+				"https://preview.redd.it/kgo4rhkzztxe1.jpg?width=2268&format=pjpg&auto=webp&s=2988991e1f857096cf11cf4bb751c38a210cf913"
+			]
+		},
+		"expected": {
+			"is_relevant": false,
+			"username": "null"
+		},
+		"post_id": "1kaxngj",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1kaxngj/acrylic_paintings_for_sale/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Fake Labubu Instashop \u201cRebeltrend\u201d",
+				"selftext": "So I ordered Labubu as well like others. This Instashop \u201cRebelTrend\u201d was constantly popping up on my feed for having Legit Labubus with QR Authenticity. As I searched everywhere for Labubus i found that 4999 is the base price for hopefully genuine labubu and like all others saying Hypefly is selling the legit (Hopefully). So i guessed that at 1k Rebeltrend is selling the unboxed or 1st copy of Labubu so i ordered one and the pictures i attached that what i got.\n\nIts totally fake not even 1st copy its a 4th or 5th copy of Labubu\u2026.its Lodubu, with fake box, fake packaging. So its a total scam don\u2019t waste money. Wait for it to be available at Offline Shops. Don\u2019t go for the online one.",
+				"author": "AmanRam005"
+			},
+			"images": [
+				"https://preview.redd.it/5iaeoqgfscef1.jpg?width=3024&format=pjpg&auto=webp&s=fc78a1cf90d747d41cf460002b6c8f1f6c31ca9a",
+				"https://preview.redd.it/lgiv0qgfscef1.jpg?width=3024&format=pjpg&auto=webp&s=1a53e18e59533f7a9abf2f695594f8ceea33597c",
+				"https://preview.redd.it/dus9vqgfscef1.jpg?width=3024&format=pjpg&auto=webp&s=b84b4e5c62879ce4da0295ccf42ac5697de94384"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "rebeltrend"
+		},
+		"post_id": "1m64ps5",
+		"permalink": "https://www.reddit.com/r/InstagramShops/comments/1m64ps5/fake_labubu_instashop_rebeltrend/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Are they legit?",
+				"selftext": "I ordered from them and when the delivery guy came I wasn\u2019t home he called me saying this package might be fake because it has no label brand name or senders address it just has paper and that they are getting a lot of such packages from insta Facebook. It was a cod order so he asked me to either cancel it or take it he was just warning. I cancelled it but I really like their stuff. Is it legit?",
+				"author": "Lazy-Appointment-103"
+			},
+			"images": [
+				"https://preview.redd.it/ck8ip7t32uae1.jpeg?auto=webp&s=33d05a32c13e23aa6ba33ff6846de380dd84c5a2"
+			]
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "yezweofficial"
+		},
+		"post_id": "1hsv7pq",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1hsv7pq/are_they_legit/"
+	},
+	{
+		"input": {
+			"post": {
+				"title": "Avoid ATCASA at All Costs",
+				"selftext": "I want to share my experience with ATCASA, as it has been incredibly frustrating. On December 18, 2024, I ordered three cases. After that, there was no communication for several days, so I contacted them. They told me that one of the cases was defective, which is why they hadn\u2019t shipped the other two. What frustrated me the most was that they never informed me about the delay, and I had to reach out to them to find out.\n\nSince the third case was defective, they asked me to choose a replacement, but I didn\u2019t want one. I asked them to ship the two available cases right away and refund me for the third case. They told me their policy didn\u2019t allow direct refunds and instead offered me store credit valid for one year. I insisted on a refund, but they kept refusing, citing company policy. Eventually, they said the third case would be marked as an urgent pre-order and would arrive by the second week of January, even though they initially said it would take 5-7 weeks.\n\nI also asked about shipping the other two cases, and they assured me they would ship those first. After receiving advice from a fellow Reddit user who had a similar experience, I kept calling and texting them through Instagram and WhatsApp for an update. Despite my repeated attempts, they ignored my messages and calls. After calling them nearly 50 times in one day, I finally received the tracking ID.\n\nOn January 7, 2025, I received the two cases, and today, I finally received the third case. However, the quality of the third case is very poor compared to the price I paid, and it's disappointing considering the long wait.\n\nIn conclusion, please do not buy from ATCASA. Their customer service has been disappointing, and the entire process has been full of delays, broken promises, and subpar product quality.\n\n\nTL;DR: I ordered three cases from ATCASA on December 18, 2024. They delayed shipping, didn\u2019t inform me about the issues, and offered store credit instead of a refund. After countless calls, I received two cases on January 7, 2025, and the third case today. However, the quality of the third case is poor compared to the price I paid. Avoid ATCASA at all costs. ",
+				"author": "BunoFendy"
+			},
+			"images": []
+		},
+		"expected": {
+			"is_relevant": true,
+			"username": "atcasa"
+		},
+		"post_id": "1if3eai",
+		"permalink": "https://www.reddit.com/r/InstaShoppingFails/comments/1if3eai/avoid_atcasa_at_all_costs/"
+	}
+]

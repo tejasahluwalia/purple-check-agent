@@ -20,7 +20,7 @@ The system supports incremental fetching of new posts:
     - Determine if the post is relevant by making an LLM API call with the `title`, `self_text` and `media` (if `post["gallery_data"]` is present, then `post["media_metadata"][<for all image_ids from gallery_data>]["s"]["u"]` has the images, else `post["preview"][<for all previews>]["source"]` has the image url)
     - If the post is refers to an Instagram page, and there is enough information to accurately extract the username, then continue. Add it to a list of relevant posts.
     - Fetch comments for the post using `post["permalink"]` and `fetch_post_comments` function and add them to the post object.
-    - Determine if there is enough information to confidently say if the post is positive or negative feedback by providing the entire post and images to an LLM API call and save the result to the post object.
+    - Determine all the sentiments present in the post and its comments.
     - Finally, add the data to the database.
 
 ## Usage:
@@ -29,7 +29,7 @@ The system supports incremental fetching of new posts:
 uv run fetch_posts.py
 
 # Process new posts
-uv run main.py
+uv run run_agent.py
 ```
 
 ## File Structure:
@@ -37,10 +37,10 @@ uv run main.py
 agent/
 ├── src/                   # Python source code modules
 │   ├── agent.py           # Agentic loop
-│   ├── db.py              # Database connection and queries
+│   ├── feedback_db.py     # Database connection and queries
+│   ├── posts_db.py        # Database connection and queries
 │   ├── fetch.py           # Reddit data fetching logic
-│   ├── llm.py             # LLM API integration
-│   └── utils.py           # Shared utilities
+│   └── llm.py             # LLM API integration
 ├── data/                  # Data storage
 │   ├── raw/               # Raw subreddit JSON data
 │   │   ├── InstagramShops/
@@ -51,13 +51,18 @@ agent/
 │   └── db/               # Database files
 ├── config/               # Configuration files
 │   └── llm_config.json   # LLM provider configuration
-├── lib/                # External binaries
+├── lib/                  # External binaries
 │   ├── curlfire          # HTTP client with Firefox cookies
 │   └── cookiefire        # Cookie extractor
+├── test/                 # Test files
+│   ├── generate_test_data.py
+│   ├── test_analyze_sentiment.py
+│   ├── test_extract_instagram_username.py
+│   ├── extract_instagram_username_test_data.json
+│   └── analyze_sentiment_test_data.json 
 ├── pyproject.toml        # Python dependencies
 ├── README.md
 ├── fetch_posts.py        # Entry point: calls src.fetch.main()
-├── main.py               # Entry point: calls src.agent.main()
-├── extract_posts.py      # Entry point: calls src.extract.main()
+├── run_agent.py               # Entry point: calls src.agent.main()
 └── .env                  # Environment variables
 ```
